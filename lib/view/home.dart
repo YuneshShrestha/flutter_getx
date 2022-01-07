@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/controller/dog_controller.dart';
 import 'package:getx/view/page1.dart';
 
 class Home extends StatelessWidget {
@@ -7,6 +8,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dogController = Get.put(DogCotroller());
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
@@ -49,6 +51,12 @@ class Home extends StatelessWidget {
                 Get.toNamed("/page3");
               },
               child: const Text("Page 3")),
+          ElevatedButton(
+              onPressed: () {
+                dogController.dogList();
+                Get.toNamed("/dog");
+              },
+              child: const Text("Dog")),
         ],
       ),
     );

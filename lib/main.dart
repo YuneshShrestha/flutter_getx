@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getx/binding/controller_binding.dart';
+import 'package:getx/view/dog.dart';
 import 'package:getx/view/home.dart';
 import 'package:get/get.dart';
 import 'package:getx/view/page1.dart';
@@ -33,11 +35,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       defaultTransition: Transition.circularReveal,
       transitionDuration: const Duration(seconds: 2),
+      initialBinding: ControllerBinding(),
       getPages: [
         GetPage(name: "/", page: () => const Home()),
         GetPage(name: "/page1", page: () => const Page1()),
         GetPage(name: "/page2", page: () => const Page2()),
         GetPage(name: "/page3", page: () => const Page3()),
+        GetPage(name: "/dog", page: () => const Dog())
       ],
     );
   }

@@ -7,7 +7,7 @@ class Page3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var adviceController = Get.put(AdviceController());
+    var adviceController = Get.find<AdviceController>();
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
