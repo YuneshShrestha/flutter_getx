@@ -1,54 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/controller/counter_controller.dart';
 
-class Page2 extends StatefulWidget {
+class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);
 
   @override
-  State<Page2> createState() => _Page2State();
-}
-
-class _Page2State extends State<Page2> {
-  var count = 0;
-
-  @override
   Widget build(BuildContext context) {
+    var countController = Get.put(CounterController());
     return Scaffold(
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
-                onPressed: () {
-                  if (count < 10) {
-                    count++;
-                  } else {
-                    Get.snackbar("Warning", "Value will go upto 10",
-                        snackPosition: SnackPosition.BOTTOM);
-                  }
-                  // print(count);
-                  setState(() {});
-                },
-                child: const Text("+")),
+              onPressed: () {
+                countController.increment();
+              },
+              child: const Text("+"),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  if (count > 0) {
-                    count--;
-                  } else {
-                    Get.snackbar("Warning", "Value will go upto 0",
-                        snackPosition: SnackPosition.BOTTOM);
-                  }
-                  // print(count);
-                  setState(() {});
-                },
-                child: const Text("-"))
+              onPressed: () {
+                countController.decrement();
+              },
+              child: const Text("-"),
+            )
           ],
         ),
-        appBar: AppBar(
-          title: const Text("Counter App"),
-        ),
+        // appBar: AppBar(
+        //   title: const Text("Counter App"),
+        // ),
         body: Center(
-          // String interpolation
-          child: Text("$count"),
-        ));
+            // String interpolation
+            child: Obx(
+          () => Text(
+            "${countController.count}",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        )));
   }
 }
