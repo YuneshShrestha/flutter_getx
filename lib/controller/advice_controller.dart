@@ -1,21 +1,31 @@
-import 'dart:convert';
-import 'dart:io';
+// import 'dart:convert';
+// import 'dart:io';
 
+// import 'dart:core';
+// import 'dart:developer';
 import "package:get/get.dart";
-import 'package:http/http.dart' as http;
+import 'package:getx/model/advice_model.dart';
+import 'package:getx/service/remote_service.dart';
+// import 'package:http/http.dart' as http;
 
 class AdviceController extends GetxController {
-  var advice = {}.obs;
+  var advice = AdviceModel(slip: Slip(id: 0, advice: "")).obs;
   var loading = true.obs;
   Future getAdvice() async {
     try {
       loading(true);
-      var data = await http.get(Uri.parse('https://api.adviceslip.com/advice'));
-      advice.value = jsonDecode(data.body);
-    } catch (e) {
-      if (e is SocketException) {
-        Get.snackbar("", "No Internet Connection");
+      var data = await RemoteService.fetchAdvice();
+      if (data != null) {
+        // print(data);
+        // log(data);
+        advice.value = data;
+      } else {
+        Get.snackbar("Message", "Null Data");
       }
+    } catch (e) {
+      // if (e is SocketException) {
+      Get.snackbar("Message", e.toString());
+      // }
     } finally {
       loading(false);
     }

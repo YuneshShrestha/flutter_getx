@@ -12,6 +12,9 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
+        actions: const [
+          Icon(Icons.ac_unit),
+        ],
       ),
       body: Wrap(
         // runAlignment: WrapAlignment.spaceBetween,

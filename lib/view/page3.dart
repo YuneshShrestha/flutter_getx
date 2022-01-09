@@ -24,7 +24,7 @@ class Page3 extends StatelessWidget {
             child: Obx(() {
               if (adviceController.loading.value == false) {
                 return Text(
-                  adviceController.advice['slip']['advice'],
+                  adviceController.advice.value.slip.advice,
                   textScaleFactor: 1.5,
                 );
               } else {

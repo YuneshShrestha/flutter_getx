@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:flutter/material.dart';
 import 'package:getx/controller/dog_controller.dart';
+import 'package:getx/utils/string.dart';
 
 class Dog extends StatelessWidget {
   const Dog({Key? key}) : super(key: key);
@@ -22,7 +23,30 @@ class Dog extends StatelessWidget {
                   );
                 } else {
                   return Card(
-                    child: Text(dogController.dogList[index]['name']),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: FadeInImage(
+                            placeholder: AssetImage(AppString.noImage),
+                            image: NetworkImage(
+                                dogController.dogList[index].image!.url),
+                          ),
+                        ),
+                        // child: Image.network(
+                        //     dogController.dogList[index].image!.url)),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(dogController.dogList[index].name!)
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   );
                 }
               },
